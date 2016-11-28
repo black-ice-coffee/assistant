@@ -87,6 +87,6 @@ public class MessengerController {
         }
     }
 
-    private static final String token = "EAAR4EdIQ4GMBAPD4WlRTgnsgb9nWxQbmIVjkBaXNCDAfTYZCzBs9HSnZCRDynFkqgaZAVZBgLWAvvfswIdgI6U9jstvo0xjo1V2NyK9NNolAdkUeaKihOcSNvWCFPdpqPPmeFtlru01Rwar8Yh4THE7bJYOIhyZAcz4qZBg7gzdgZDZD";
+    private static final String token = "EAAR4EdIQ4GMBAJeAJDRZCpYjH83tjtZAV3TvK26DBJEQgzmyloemVY0YCxHMwMEkbFq0dZCZBHx47cD7cdQ6Ostxgc87lforBauOauFYQwmYBrU1tUEqsfxZBzsSjogTDNXko0Qaw0zRunBHHnse6kIghfpyPEGGcQHmepbfJoAZDZD";
     private static final MessengerSendClient sendClient = MessengerPlatform.newSendClientBuilder(token).build();
 }
