@@ -80,7 +80,7 @@ public class MessengerController {
 
         try {
             System.out.println(recipientId + " - " + messageText);
-            if(messageText != null){
+            if(messageText != null && !messageText.equalsIgnoreCase("hi")){
                 sendClient.sendTextMessage(recipientId, messageText);
             }
         } catch (MessengerApiException e) {
