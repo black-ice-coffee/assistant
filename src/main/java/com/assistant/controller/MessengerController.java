@@ -79,6 +79,7 @@ public class MessengerController {
         }
 
         try {
+            System.out.println(recipientId + " - " + messageText);
             sendClient.sendTextMessage(recipientId, messageText);
         } catch (MessengerApiException e) {
             e.printStackTrace();
