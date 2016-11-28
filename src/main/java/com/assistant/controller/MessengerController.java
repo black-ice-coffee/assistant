@@ -43,7 +43,7 @@ public class MessengerController {
 
     @RequestMapping(path = "webhook", method = RequestMethod.POST)
     public void webhookPost(@RequestBody String body){
-
+        System.out.println(body);
         final JsonObject payloadJsonObject = this.jsonParser.parse(body).getAsJsonObject();
 
         final String objectType = getPropertyAsString(payloadJsonObject, PROP_OBJECT);
@@ -80,7 +80,9 @@ public class MessengerController {
 
         try {
             System.out.println(recipientId + " - " + messageText);
-            sendClient.sendTextMessage(recipientId, messageText);
+            if(messageText != null){
+                sendClient.sendTextMessage(recipientId, messageText);
+            }
         } catch (MessengerApiException e) {
             e.printStackTrace();
         } catch (MessengerIOException e) {
