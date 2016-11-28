@@ -43,7 +43,6 @@ public class MessengerController {
 
     @RequestMapping(path = "webhook", method = RequestMethod.POST)
     public void webhookPost(@RequestBody String body){
-        System.out.println(body);
         final JsonObject payloadJsonObject = this.jsonParser.parse(body).getAsJsonObject();
 
         final String objectType = getPropertyAsString(payloadJsonObject, PROP_OBJECT);
@@ -76,11 +75,12 @@ public class MessengerController {
 
         if("weather".equalsIgnoreCase(messageText)){
             messageText = "It's rain in Ho Chi Minh city";
+        } else if("temperature".equalsIgnoreCase(messageText)){
+            messageText = "It's 30 Celsius degree in Ho Chi Minh city";
         }
 
         try {
-            System.out.println(recipientId + " - " + messageText);
-            if(messageText != null && !messageText.equalsIgnoreCase("hi")){
+            if(messageText != null){
                 sendClient.sendTextMessage(senderId, messageText);
             }
         } catch (MessengerApiException e) {
