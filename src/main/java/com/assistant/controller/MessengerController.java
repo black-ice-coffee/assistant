@@ -1,5 +1,6 @@
 package com.assistant.controller;
 
+import com.assistant.service.WeatherService;
 import com.github.messenger4j.MessengerPlatform;
 import com.github.messenger4j.exceptions.MessengerApiException;
 import com.github.messenger4j.exceptions.MessengerIOException;
@@ -74,9 +75,11 @@ public class MessengerController {
         String messageText = getPropertyAsString(messageObject, PROP_TEXT);
 
         if("weather".equalsIgnoreCase(messageText)){
-            messageText = "It's rain in Ho Chi Minh city";
+            WeatherService weatherService = new WeatherService();
+            messageText = "It's " + weatherService.getCurrentWeather() + " in Ho Chi Minh city";
         } else if("temperature".equalsIgnoreCase(messageText)){
-            messageText = "It's 30 Celsius degree in Ho Chi Minh city";
+            WeatherService weatherService = new WeatherService();
+            messageText = "It's " + weatherService.getCurrentTemperature() + " Celsius degree in Ho Chi Minh city";
         }
 
         try {
