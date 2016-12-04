@@ -83,6 +83,6 @@ class TextRank {
       }
     }
 
-    return summary.mkString(".")
+    return summary.mkString(". ")
   }
 }
