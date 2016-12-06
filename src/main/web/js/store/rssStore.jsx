@@ -8,7 +8,7 @@ class RSSStore {
     url = '';
     items = [];
 
-    fetch(){
+    fetchRSS(){
         const request = new Request(API.getFullUrl(API.rss), {url: this.url});
         return call(request);
     }
@@ -16,7 +16,7 @@ class RSSStore {
     updateUrl(url){
         this.url = url;
         this.isLoading = true;
-        const request = new Request(API.getFullUrl(API.rss), {url: this.url});
+        const request = new Request(API.getFullUrl(API.feedSummary), {url: this.url});
         promiseCall(request).then((respond) => {
             this.items = respond.data;
             this.isLoading = false;

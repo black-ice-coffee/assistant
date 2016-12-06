@@ -1,0 +1,36 @@
+[
+  {
+    "name": "VNExpress",
+    "items": [
+      {
+        "name": "trang-chu",
+        "url": "http://vnexpress.net/rss/tin-moi-nhat.rss"
+      },
+      {
+        "name": "thoi-su",
+        "url": "http://vnexpress.net/rss/thoi-su.rss"
+      },
+      {
+        "name": "the-gioi",
+        "url": "http://vnexpress.net/rss/the-gioi.rss"
+      },
+      {
+        "name": "kinh-doanh",
+        "url": "http://vnexpress.net/rss/kinh-doanh.rss"
+      }
+    ]
+  },
+  {
+    "name": "BBC",
+    "items": [
+      {
+        "name": "viet-nam",
+        "url": "http://feeds.bbci.co.uk/vietnamese/vietnam/rss.xml"
+      },
+      {
+        "name": "the-gioi",
+        "url": "http://feeds.bbci.co.uk/vietnamese/world/rss.xml"
+      }
+    ]
+  }
+]

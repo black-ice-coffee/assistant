@@ -22,22 +22,44 @@ class RSSItem extends Component{
     }
 }
 
+@observer
 class RSSAddress extends Component{
     constructor(props){
         super(props);
         this.rssSelect = this.rssSelect.bind(this);
+        this.renderGroup = this.renderGroup.bind(this);
+        this.state = {
+            rssGroups : []
+        };
+    }
+
+    componentDidMount(){
+        this.props.store.fetchRSS().subscribe(
+            (res) => {this.setState({rssGroups: res})}
+        );
     }
 
     rssSelect(url){
         this.props.store.updateUrl(url);
     }
 
-    render(){        
+    renderGroup(group){
+        const children = group.items.map((model, index) => {
+            return <ListGroupItem key={index} onClick={(event) => this.rssSelect(model.url)}>{model.name}</ListGroupItem>
+        });
         return (
-            <ListGroup>
-                <ListGroupItem href="#thoi-su" onClick={(event) => this.rssSelect('http://vnexpress.net/rss/thoi-su.rss')}>Thoi su</ListGroupItem>
-                <ListGroupItem href="#the-gioi" onClick={(event) => this.rssSelect('http://vnexpress.net/rss/the-gioi.rss')}>The gioi</ListGroupItem>
-            </ListGroup>
+            <Panel header={group.name} key={group.name}>
+                <ListGroup>{children}</ListGroup>
+            </Panel>
+        );
+    }
+
+    render(){
+        const groups = this.state.rssGroups.map((model, index) => {
+            return this.renderGroup(model);
+        });
+        return (
+            <div>{groups}</div>
         );
     }
 }
@@ -74,12 +96,12 @@ class RSSList extends Component{
         const children = this.buildRss();
 
         return (
-            <Grid>
+            <Grid fluid>
                 <Row>
                     <Col md={2}>
                         <RSSAddress store={self.rssStore}/>
                     </Col>
-                    <Col md={9}>
+                    <Col md={10}>
                         {children}
                     </Col>
                 </Row>                
