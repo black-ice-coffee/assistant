@@ -27,8 +27,8 @@ class Request{
     }
 }
 
-function call(request) {
-    var store = window.masterStore
+function buildRequest(request){
+var store = window.masterStore
     var data = request.data
     if(request.contentType === "application/x-www-form-urlencoded"){
         data = QueryString.stringify(request.data)
@@ -49,6 +49,11 @@ function call(request) {
         finalRequest["headers"] = {'Authorization': store.user.token}
     }
 */
+    return finalRequest;
+}
+
+function call(request) {
+    var finalRequest = buildRequest(request);
     return Observable.create(function(observer) {
         axios.request(finalRequest).then(function (response) {
             observer.next(response.data)
@@ -59,4 +64,9 @@ function call(request) {
     });
 }
 
-export {API, HttpMethod, Request, call};
+function promiseCall(request){
+    var finalRequest = buildRequest(request);
+    return axios.request(finalRequest);
+}
+
+export {API, HttpMethod, Request, call, promiseCall};
