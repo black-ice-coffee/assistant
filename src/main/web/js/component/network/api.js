@@ -6,7 +6,8 @@ import QueryString from 'query-string';
 const API = {
     domain: "http://localhost:8080",
     feedSummary: "/feed/summary",
-    rss: "/feed/rss",
+    groups: "/feed/groups",
+    groupItems: "/feed/groups/:id",
     getFullUrl(api){
         return this.domain + api;
     }

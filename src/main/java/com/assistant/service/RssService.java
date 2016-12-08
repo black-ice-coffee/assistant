@@ -3,6 +3,7 @@ package com.assistant.service;
 import com.assistant.Helper;
 import com.assistant.model.RSSGroup;
 import com.assistant.model.RSSItem;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class RssService {
 
     public RssService() {
         try {
-            groups = Helper.loadFromResource("rss.json", groups.getClass());
+            groups = Helper.loadFromResource("rss.json", new TypeReference<List<RSSGroup>>(){});
         } catch (Exception e){
             groups = new ArrayList<>();
         }
@@ -23,6 +24,34 @@ public class RssService {
 
     public List<RSSGroup> getRssGroups(){
         return groups;
+    }
+
+    public RSSGroup addGroup(RSSGroup group){
+        if(group.id == null) {
+            group.id = Helper.generateId();
+            groups.add(group);
+        }
+        return group;
+    }
+
+    public RSSGroup addUrl(String groupId, RSSItem item){
+        RSSGroup group = findGroup(groupId);
+        if(group != null){
+            group.items.add(item);
+        }
+        return group;
+    }
+
+    private RSSGroup findGroup(String groupId){
+        for(RSSGroup group: groups){
+            if(group.id.equalsIgnoreCase(groupId)){
+                if(group.items == null){
+                    group.items = new ArrayList<>();
+                }
+                return group;
+            }
+        }
+        return null;
     }
 
     private void createSample(){
