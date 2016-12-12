@@ -12,6 +12,7 @@ public class NewsEntity {
     private String content;
     private Timestamp publishedDate;
     private String rssUrl;
+    private String summary;
 
     @Id
     @Column(name = "url")
@@ -98,5 +99,15 @@ public class NewsEntity {
 
     public void setRssUrl(String rssUrl) {
         this.rssUrl = rssUrl;
+    }
+
+    @Basic
+    @Column(name = "summary")
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

@@ -1,12 +1,14 @@
 package com.assistant.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "rss", schema = "assistant", catalog = "assistant")
 public class RssEntity {
     private String url;
     private String title;
+    private Timestamp lastUpdated;
 
     @Id
     @Column(name = "url")
@@ -46,5 +48,15 @@ public class RssEntity {
         int result = url != null ? url.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "last_updated")
+    public Timestamp getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Timestamp lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

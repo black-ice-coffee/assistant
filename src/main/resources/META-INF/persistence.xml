@@ -4,8 +4,9 @@
 			 version="2.0">
 	<persistence-unit name="assistant">
 		<class>com.assistant.entity.NewsEntity</class>
+		<class>com.assistant.entity.RssEntity</class>
 		<properties>
-			<property name="hibernate.connection.url" value="jdbc:postgresql://192.168.99.100:32770/assistant"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://192.168.99.100:32768/assistant"/>
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
 			<property name="hibernate.connection.username"/>
 			<property name="hibernate.connection.password"/>
