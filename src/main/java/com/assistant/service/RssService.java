@@ -1,66 +1,82 @@
 package com.assistant.service;
 
 import com.assistant.Helper;
+import com.assistant.entity.RssGroupEntity;
+import com.assistant.entity.RssGroupItemEntity;
 import com.assistant.model.RSSGroup;
 import com.assistant.model.RSSItem;
+import com.assistant.repository.RssGroupItemRepository;
+import com.assistant.repository.RssGroupRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class RssService {
 
-    List<RSSGroup> groups = new ArrayList<>();
+    @Autowired
+    private RssGroupRepository rssGroupRepository;
 
-    public RssService() {
-        try {
-            groups = Helper.loadFromResource("rss.json", new TypeReference<List<RSSGroup>>(){});
-        } catch (Exception e){
-            groups = new ArrayList<>();
-        }
-        //createSample();
-    }
+    @Autowired
+    private RssGroupItemRepository rssGroupItemRepository;
 
     public List<RSSGroup> getRssGroups(){
+        List<RssGroupEntity> groupEntities = rssGroupRepository.findAll();
+        List<RSSGroup> groups = new ArrayList<>();
+        for (RssGroupEntity groupEntity: groupEntities) {
+            List<RssGroupItemEntity> itemEntities = rssGroupItemRepository.findById(groupEntity.getId());
+            RSSGroup group = toDto(groupEntity, itemEntities);
+            groups.add(group);
+        }
         return groups;
     }
 
     public RSSGroup addGroup(RSSGroup group){
         if(group.id == null) {
-            group.id = Helper.generateId();
-            groups.add(group);
+            RssGroupEntity groupEntity = new RssGroupEntity();
+            groupEntity.setId(Helper.generateId());
+            groupEntity.setTitle(group.name);
+            rssGroupRepository.saveAndFlush(groupEntity);
         }
         return group;
     }
 
     public RSSGroup addUrl(String groupId, RSSItem item){
-        RSSGroup group = findGroup(groupId);
-        if(group != null){
-            group.items.add(item);
-        }
-        return group;
-    }
+        RssGroupEntity groupEntity = rssGroupRepository.findOne(groupId);
+        if(groupEntity != null){
+            RssGroupItemEntity itemEntity = new RssGroupItemEntity();
+            itemEntity.setId(groupId);
+            itemEntity.setTitle(item.name);
+            itemEntity.setUrl(item.url);
+            rssGroupItemRepository.saveAndFlush(itemEntity);
 
-    private RSSGroup findGroup(String groupId){
-        for(RSSGroup group: groups){
-            if(group.id.equalsIgnoreCase(groupId)){
-                if(group.items == null){
-                    group.items = new ArrayList<>();
-                }
-                return group;
-            }
+            List<RssGroupItemEntity> itemEntities = rssGroupItemRepository.findById(groupEntity.getId());
+            return toDto(groupEntity, itemEntities);
         }
         return null;
     }
 
-    private void createSample(){
+    public RSSGroup findGroup(String groupId){
+        RssGroupEntity groupEntity = rssGroupRepository.findOne(groupId);
+        if(groupEntity != null){
+            List<RssGroupItemEntity> itemEntities = rssGroupItemRepository.findById(groupEntity.getId());
+            return toDto(groupEntity, itemEntities);
+        }
+        return null;
+    }
+
+    private RSSGroup toDto(RssGroupEntity groupEntity, List<RssGroupItemEntity> itemEntities){
         RSSGroup group = new RSSGroup();
-        group.name = "VNExpress";
-        group.items.add(new RSSItem("trang-chu", "http://vnexpress.net/rss/tin-moi-nhat.rss"));
-        group.items.add(new RSSItem("thoi-su", "http://vnexpress.net/rss/thoi-su.rss"));
-        group.items.add(new RSSItem("the-gioi", "http://vnexpress.net/rss/the-gioi.rss"));
-        group.items.add(new RSSItem("kinh-doanh", "http://vnexpress.net/rss/kinh-doanh.rss"));
-        groups.add(group);
+        group.id = groupEntity.getId();
+        group.name = groupEntity.getTitle();
+
+        for(RssGroupItemEntity itemEntity: itemEntities){
+            group.items.add(new RSSItem(itemEntity.getTitle(), itemEntity.getUrl()));
+        }
+        return group;
     }
 }

@@ -8,6 +8,7 @@ import com.assistant.service.RssService;
 import com.assistant.service.RssSummaryService;
 import com.rometools.rome.io.FeedException;
 import de.l3s.boilerpipe.BoilerpipeProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -18,8 +19,10 @@ import java.util.List;
 @RequestMapping("feed/")
 public class RssController {
 
-    RssSummaryService summaryService = new RssSummaryService();
-    RssService rssService = new RssService();
+    @Autowired
+    private RssSummaryService summaryService;
+    @Autowired
+    private RssService rssService;
 
     @RequestMapping(value = "summary", method = RequestMethod.GET)
     public Respond rssSummary(@RequestParam(required = true, value = "url") String url) throws BoilerpipeProcessingException, IOException, FeedException {
@@ -27,7 +30,7 @@ public class RssController {
     }
 
     @RequestMapping(value = "groups", method = RequestMethod.GET)
-    public Respond rss(){
+    public Respond getGroups(){
         return Helper.createSuccess(rssService.getRssGroups());
     }
 
@@ -39,6 +42,16 @@ public class RssController {
     @RequestMapping(value = "groups/{groupId}", method = RequestMethod.POST)
     public Respond addRSS(@PathVariable String groupId, @RequestBody RSSItem item){
         RSSGroup group = rssService.addUrl(groupId, item);
+        if(group != null){
+            return Helper.createSuccess(group);
+        } else{
+            return Helper.createFail("Group " + groupId + " doesn't exist");
+        }
+    }
+
+    @RequestMapping(value = "groups/{groupId}", method = RequestMethod.GET)
+    public Respond getGroup(@PathVariable String groupId){
+        RSSGroup group = rssService.findGroup(groupId);
         if(group != null){
             return Helper.createSuccess(group);
         } else{

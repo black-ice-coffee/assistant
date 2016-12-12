@@ -8,6 +8,7 @@ import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 import de.l3s.boilerpipe.BoilerpipeProcessingException;
 import de.l3s.boilerpipe.extractors.ArticleExtractor;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+@Service
 public class RssSummaryService {
 
     private TextRank rank = new TextRank();
