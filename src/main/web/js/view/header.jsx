@@ -9,7 +9,7 @@ export default class Header extends Component{
 
     render(){
         return (
-            <Navbar fluid bsStyle="inverse" className="navbar-fixed-top">
+            <Navbar fluid className="navbar-fixed-top">
                 <Navbar.Header>
                     <Navbar.Brand>
                         <a href="/">Assistant</a>

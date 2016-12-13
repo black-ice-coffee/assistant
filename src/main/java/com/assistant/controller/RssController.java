@@ -6,7 +6,6 @@ import com.assistant.model.RSSItem;
 import com.assistant.model.Respond;
 import com.assistant.service.NewsService;
 import com.assistant.service.RssConfigurationService;
-import com.assistant.service.RssSummaryService;
 import com.rometools.rome.io.FeedException;
 import de.l3s.boilerpipe.BoilerpipeProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("feed/")
 public class RssController {
-
-    @Autowired
-    private RssSummaryService summaryService;
 
     @Autowired
     private RssConfigurationService rssService;

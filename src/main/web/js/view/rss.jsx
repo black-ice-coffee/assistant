@@ -3,12 +3,15 @@ import {Grid, Row, Col} from 'react-bootstrap';
 import {Panel, Jumbotron, Glyphicon, Modal,FormGroup, FormControl, Button, PageHeader} from 'react-bootstrap';
 import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import {Responsive, WidthProvider} from 'react-grid-layout';
+import {Affix} from 'react-overlays';
 const ReactGridLayout = WidthProvider(Responsive);
 
 import {observer} from 'mobx-react';
 
 import RSSStore from '../store/rssStore';
 import {RSSGroup, RSSItem} from '../model/rssModel'
+
+import '../../scss/rss.scss';
 
 class RSSItemValue extends Component{
     constructor(props){
@@ -138,6 +141,7 @@ class RSSAddress extends Component{
         if(!model.isValid)return;
         this.props.store.addGroup(model).subscribe(
             (res) => {
+                this.setState({ showModal: false });
                 this.loadRssGroup();
             }
         )
@@ -161,11 +165,14 @@ class RSSAddress extends Component{
             return <RSSItemGroup group={model} store={this.props.store} key={index}/>;
         });
         return (
-            <div>
-                <div>
-                    <labelp>Groups</labelp>
-                    <Glyphicon glyph="plus" className="clickable pull-right" onClick={this.open }/>
-                </div>
+            
+            <div className="container-fluid">
+                <Panel className="panel panel-primary">
+                    <div>
+                        <labelp>Groups</labelp>
+                        <Glyphicon glyph="plus" className="clickable pull-right" onClick={this.open }/>
+                    </div>
+                </Panel>
                 {groups}                
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Header>Add group</Modal.Header>
@@ -181,7 +188,8 @@ class RSSAddress extends Component{
                         <Button onClick={this.close}>Cancel</Button>
                     </Modal.Footer>
                 </Modal>
-            </div>
+            </div>    
+            
         );
     }
 }

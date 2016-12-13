@@ -7,7 +7,6 @@ import com.assistant.entity.RssGroupItemEntity;
 import com.assistant.repository.NewsRepository;
 import com.assistant.repository.RssGroupItemRepository;
 import com.assistant.repository.RssRepository;
-import com.assistant.service.RssSummaryService;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;

@@ -1,0 +1,3 @@
+INSERT INTO assistant.rss_group (id, title) VALUES ('EB944276-3AB6-4AA4-B812-B121D1E8A1BE', 'VNExpress');
+INSERT INTO assistant.rss_group (id, title) VALUES ('CC0ED697-8E72-4E2A-B38A-83B12441CE7B', 'BBC');
+INSERT INTO assistant.rss_group (id, title) VALUES ('68FB0ABB-7D63-4F0C-A90D-D2FBD678C310', 'VOA');
