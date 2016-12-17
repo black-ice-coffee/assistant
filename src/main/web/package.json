@@ -52,9 +52,11 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "leaflet": "^1.0.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "react-router": "^3.0.0"
+    "react-router": "^3.0.0",
+    "url-loader": "^0.5.7"
   },
   "eslintConfig": {
     "extends": "airbnb",

@@ -19,6 +19,7 @@ export default class Header extends Component{
                 <Navbar.Collapse>
                     <Nav>
                         <NavItem href="/rss">RSS</NavItem>
+                        <NavItem href="/map">Map</NavItem>
                     </Nav>
                     <Nav pullRight>
                         <NavItem href="/about">About</NavItem>

@@ -1,10 +1,10 @@
 
-create schema assistant
+create schema if not EXISTS assistant
   authorization assistant;
 
 grant all on schema assistant to assistant;
 
-CREATE TABLE news
+CREATE TABLE IF NOT EXISTS news
 (
   url TEXT PRIMARY KEY NOT NULL,
   rss_url TEXT,
@@ -14,18 +14,18 @@ CREATE TABLE news
   published_date TIMESTAMP DEFAULT now(),
   summary TEXT
 );
-CREATE TABLE rss
+CREATE TABLE IF NOT EXISTS  rss
 (
   url TEXT PRIMARY KEY NOT NULL,
   title VARCHAR(1024),
   last_updated TIMESTAMP
 );
-CREATE TABLE rss_group
+CREATE TABLE IF NOT EXISTS  rss_group
 (
   id CHAR(36) PRIMARY KEY NOT NULL,
   title VARCHAR(1024)
 );
-CREATE TABLE rss_group_item
+CREATE TABLE IF NOT EXISTS rss_group_item
 (
   id CHAR(36) NOT NULL,
   url TEXT NOT NULL,

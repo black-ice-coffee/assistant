@@ -10,7 +10,7 @@ export default class App extends Component {
     return (
       <div>
         <Header/>
-        <section id="root-container">{ children }</section>		
+        <section id="root-container">{ children }</section>
       </div>
     );
   }
