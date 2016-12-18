@@ -1,23 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './view/app';
-import Home from './view/home';
-import About from './view/about';
-import RSSList from './view/rss';
-import MapView from './view/map';
+import AppView from './view/AppView';
+import HomeView from './view/HomeView';
+import AboutView from './view/AppView';
+import RSSView from './view/RSSView';
+import MapView from './view/MapView';
+import NoteView from './view/NoteView';
 
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import '../scss/app.scss';
+import './app.scss';
 
 ReactDOM.render(
   <Router history={ browserHistory }>
-    <Route path='/' component={ App }>
-      <IndexRoute component={ Home } />
-      <Route path='rss' component={ RSSList } />
+    <Route path='/' component={ AppView }>
+      <IndexRoute component={ HomeView } />
+      <Route path='rss' component={ RSSView } />
       <Route path='map' component={ MapView } />
-      <Route path='about' component={ About } />
+      <Route path='note' component={ NoteView } />
+      <Route path='about' component={ AboutView } />
     </Route>
   </Router>,
   document.getElementById('app')

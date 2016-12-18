@@ -3,7 +3,7 @@ import L from 'leaflet';
 // postCSS import of Leaflet's CSS
 import 'leaflet/dist/leaflet.css';
 
-import '../../scss/map.scss';
+import './map.scss';
 
 // store the map configuration properties in an object,
 // we could also move this to a separate file & import it if desired.
@@ -70,12 +70,13 @@ class Map extends Component {
     // a TileLayer is used as the "basemap"
     const tileLayer = L.tileLayer(config.tileLayer.uri, config.tileLayer.params).addTo(map);
 
+    map.invalidateSize();
+
     // set our state to include the tile layer
     this.setState({ map, tileLayer });
   }
 
   render() {
-    const { subwayLinesFilter } = this.state;
     return (
       <div id="mapUI">
         <div ref={(node) => this._mapNode = node} id="map" />

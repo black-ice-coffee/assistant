@@ -13,7 +13,6 @@ export default class FormModel{
         this.rules = {}
     }
 
-
     enableValidation(){
         var self = this
         if(!this.isValidating){
@@ -28,7 +27,6 @@ export default class FormModel{
             });
         }
         this.validate()
-
     }
 
     disableValidation(){

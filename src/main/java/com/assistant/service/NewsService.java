@@ -15,7 +15,7 @@ public class NewsService {
     private NewsRepository newsRepository;
 
     public List<News> getNewsOfRss(String rssUrl){
-        List<NewsEntity> newsEntities = newsRepository.findByRssUrl(rssUrl);
+        List<NewsEntity> newsEntities = newsRepository.findByRssUrlOrderByPublishedDateDesc(rssUrl);
         List<News> newsItems = new ArrayList<>();
         for(NewsEntity entity: newsEntities){
             newsItems.add(toDto(entity));

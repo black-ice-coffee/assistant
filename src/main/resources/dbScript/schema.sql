@@ -33,7 +33,17 @@ CREATE TABLE IF NOT EXISTS rss_group_item
   CONSTRAINT rss_group_item_pkey PRIMARY KEY (id, url)
 );
 
+CREATE TABLE IF NOT EXISTS note
+(
+  id CHAR(36) PRIMARY KEY NOT NULL,
+  title TEXT,
+  content TEXT,
+  created_date TIMESTAMP DEFAULT now(),
+  modified_date TIMESTAMP DEFAULT now()
+);
+
 alter table "news" owner to assistant;
 alter table "rss" owner to assistant;
 alter table "rss_group" owner to assistant;
 alter table "rss_group_item" owner to assistant;
+alter table "note" owner to assistant;

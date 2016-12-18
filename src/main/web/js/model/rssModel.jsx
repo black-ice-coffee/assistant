@@ -1,8 +1,8 @@
-import {observable} from 'mobx';
-import FormModel from './formModel';
+import {observable} from 'mobx'
+import FormModel from './formModel'
 
 class RSSGroup extends FormModel{
-    @observable name;
+    @observable name
 
     constructor(){
         super()

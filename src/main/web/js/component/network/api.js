@@ -8,6 +8,7 @@ const API = {
     feedSummary: "/feed/summary",
     groups: "/feed/groups",
     groupItems: "/feed/groups/:id",
+    note: "/notes",
     getFullUrl(api){
         return this.domain + api;
     }
