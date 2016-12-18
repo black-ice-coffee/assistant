@@ -29,9 +29,9 @@ public class NoteService {
         NoteEntity entity = fromDto(note);
         if(entity.getId() == null){
             entity.setId(Helper.generateId());
-        } else{
-            entity.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+            entity.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         }
+        entity.setModifiedDate(new Timestamp(System.currentTimeMillis()));
         entity = noteRepository.saveAndFlush(entity);
         return toDto(entity);
     }
