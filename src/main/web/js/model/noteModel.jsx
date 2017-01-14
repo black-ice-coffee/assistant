@@ -16,7 +16,7 @@ class NoteModel extends FormModel{
         var input = {
             title:this.title
         }
-        super.validate(input,this.rules)
+        super.validate(input,this.rules, { required: 'You forgot to give a :attribute' })
     }
 }
 

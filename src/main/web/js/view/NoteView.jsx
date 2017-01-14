@@ -58,13 +58,16 @@ class NoteList extends Component {
             notes: [],
             showModal: false,
             model: noteModel,
-            editorState: EditorState.createEmpty()
+            editorState: EditorState.createEmpty(),
+            errors: {}
         };
         this.add = this.add.bind(this);
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
         this.loadNotes = this.loadNotes.bind(this);
         this.onChange = (editorState) => this.setState({editorState});
+        this.validationState = this.validationState.bind(this)
+        this.validateInput = this.validateInput.bind(this)
     }
 
     loadNotes() {
@@ -80,9 +83,8 @@ class NoteList extends Component {
     }
 
     add() {
-        var {model, editorState} = this.state;
-        model.enableValidation();
-        if (!model.isValid)return;
+        if(!this.validateInput())
+            return
         this.props.store.addNote({title: model.title, content: JSON.stringify(convertToRaw(editorState.getCurrentContent()))}).subscribe(
             (res) => {
                 this.setState({showModal: false});
@@ -102,11 +104,31 @@ class NoteList extends Component {
     handleChange(event) {
         let {model} =  this.state
         model[event.target.name] = event.target.value
+        this.validateInput()
+    }
+
+    validationState(field){
+        const {errors} = this.state;
+        if(errors[field]){
+            return 'error'
+        }
+
+        return null
+    }
+
+    validateInput(){
+        this.setState({errors: {}})
+        var {model} = this.state;
+        model.enableValidation();
+        if (!model.isValid){
+            this.setState({errors: model.errors.errors})
+        }
+        return model.isValid
     }
 
     render() {
 
-        const {editorState, notes} = this.state;
+        const {editorState, notes, errors} = this.state;
         const children = notes.map((model, index) => {
             return <NoteItem note={model} store={this.props.store} key={index}/>;
         });
@@ -123,7 +145,7 @@ class NoteList extends Component {
                     <Modal.Header>Add Note</Modal.Header>
                     <Modal.Body>
                         <form>
-                            <FormGroup controlId="formtitle">
+                            <FormGroup controlId="formtitle" validationState={this.validationState('title')}>
                                 <FormControl type="text" name="title" placeholder="Note title" onChange={(event) => this.handleChange(event)}/>
                             </FormGroup>
                             <FormGroup controlId="formcontent">

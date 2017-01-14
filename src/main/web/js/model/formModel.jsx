@@ -36,16 +36,16 @@ export default class FormModel{
         }
     }
 
-    validate(inputs,rules){
+    validate(inputs,rules, messages){
         if(this.isValidating){
-            const validator = new Validator(inputs,rules);
+            const validator = new Validator(inputs,rules, messages);
             validator.passes();
             if(validator.errorCount > 0){
                 this.isValid = false
-                this.error = validator.errors.all();
+                this.errors = validator.errors;
             }else{
                 this.isValid = true
-                this.error = {}
+                this.errors = {}
             }
         }
     }

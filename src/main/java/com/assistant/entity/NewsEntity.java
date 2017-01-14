@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "news", schema = "assistant", catalog = "assistant")
+@Table(name = "news")
 public class NewsEntity {
     private String url;
     private String author;

@@ -6,8 +6,10 @@
 		<class>com.assistant.entity.NewsEntity</class>
 		<class>com.assistant.entity.RssEntity</class>
         <class>com.assistant.entity.NoteEntity</class>
+        <class>com.assistant.entity.RssGroupEntity</class>
+        <class>com.assistant.entity.RssGroupItemEntity</class>
         <properties>
-			<property name="hibernate.connection.url" value="jdbc:postgresql://192.168.99.100:32768/assistant"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://192.168.99.100:32768/heroku_database"/>
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
 			<property name="hibernate.connection.username"/>
 			<property name="hibernate.connection.password"/>

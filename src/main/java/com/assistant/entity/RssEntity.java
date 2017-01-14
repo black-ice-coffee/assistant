@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "rss", schema = "assistant", catalog = "assistant")
+@Table(name = "rss")
 public class RssEntity {
     private String url;
     private String title;

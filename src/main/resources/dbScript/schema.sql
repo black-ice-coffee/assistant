@@ -1,9 +1,3 @@
-
-create schema if not EXISTS assistant
-  authorization assistant;
-
-grant all on schema assistant to assistant;
-
 CREATE TABLE IF NOT EXISTS news
 (
   url TEXT PRIMARY KEY NOT NULL,
@@ -41,9 +35,3 @@ CREATE TABLE IF NOT EXISTS note
   created_date TIMESTAMP DEFAULT now(),
   modified_date TIMESTAMP DEFAULT now()
 );
-
-alter table "news" owner to assistant;
-alter table "rss" owner to assistant;
-alter table "rss_group" owner to assistant;
-alter table "rss_group_item" owner to assistant;
-alter table "note" owner to assistant;

@@ -3,7 +3,7 @@ package com.assistant.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "rss_group", schema = "assistant", catalog = "assistant")
+@Table(name = "rss_group")
 public class RssGroupEntity {
     private String id;
     private String title;
