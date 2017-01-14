@@ -83,6 +83,7 @@ class NoteList extends Component {
     }
 
     add() {
+        var {model, editorState} = this.state;
         if(!this.validateInput())
             return
         this.props.store.addNote({title: model.title, content: JSON.stringify(convertToRaw(editorState.getCurrentContent()))}).subscribe(
