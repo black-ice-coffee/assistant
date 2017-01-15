@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import QueryString from 'query-string';
 
 const API = {
-    domain: "http://localhost:8080",
+    domain: "https://agile-inlet-54897.herokuapp.com",
     feedSummary: "/feed/summary",
     groups: "/feed/groups",
     groupItems: "/feed/groups/:id",
