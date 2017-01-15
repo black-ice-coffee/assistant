@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import Map from '../component/map/Map';
 
 export default class MapView extends Component {
     constructor(props) {
@@ -34,7 +33,6 @@ export default class MapView extends Component {
         }
         return (
             <div id="map-container" style={mapPageStyle}>
-                <Map />
             </div>
         )
     }
