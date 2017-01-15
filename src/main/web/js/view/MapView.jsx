@@ -1,5 +1,20 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import _ from "lodash";
+
+// Wrap all `react-google-maps` components with `withGoogleMap` HOC
+// and name it GettingStartedGoogleMap
+const GettingStartedGoogleMap = withGoogleMap(props => (
+    <GoogleMap
+        ref={props.onMapLoad}
+        defaultZoom={10}
+        defaultCenter={{ lat: 10.800717, lng: 106.6599423 }}
+        onClick={props.onMapClick}
+    >
+
+    </GoogleMap>
+));
 
 export default class MapView extends Component {
     constructor(props) {
@@ -32,8 +47,17 @@ export default class MapView extends Component {
             width: this.state.width
         }
         return (
-            <div id="map-container" style={mapPageStyle}>
-            </div>
+            <GettingStartedGoogleMap
+                containerElement={
+                    <div style={mapPageStyle} />
+                }
+                mapElement={
+                    <div style={{ height: `100%` }} />
+                }
+                onMapLoad={_.noop}
+                onMapClick={_.noop}
+                onMarkerRightClick={_.noop}
+            />
         )
     }
 }
