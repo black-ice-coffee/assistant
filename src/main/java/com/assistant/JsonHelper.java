@@ -38,6 +38,11 @@ public final class JsonHelper {
         return getProperty(jsonObject, propertyPath) != null;
     }
 
+    public static Boolean getPropertyAsBoolean(JsonObject jsonObject, Constants... propertyPath) {
+        final JsonElement jsonElement = getProperty(jsonObject, propertyPath);
+        return jsonElement == null ? null : jsonElement.getAsBoolean();
+    }
+
     public static String getPropertyAsString(JsonObject jsonObject, Constants... propertyPath) {
         final JsonElement jsonElement = getProperty(jsonObject, propertyPath);
         return jsonElement == null ? null : jsonElement.getAsString();

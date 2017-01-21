@@ -11,10 +11,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.web.bind.annotation.*;
 
+import static com.assistant.JsonHelper.*;
 import static com.assistant.JsonHelper.Constants.*;
-import static com.assistant.JsonHelper.getPropertyAsJsonArray;
-import static com.assistant.JsonHelper.getPropertyAsJsonObject;
-import static com.assistant.JsonHelper.getPropertyAsString;
 
 
 @RestController
@@ -69,6 +67,13 @@ public class MessengerController {
         JsonObject messageObject = getPropertyAsJsonObject(messagingEvent, PROP_MESSAGE);
         JsonObject senderObject = getPropertyAsJsonObject(messagingEvent, PROP_SENDER);
         JsonObject recipientObject = getPropertyAsJsonObject(messagingEvent, PROP_RECIPIENT);
+
+        if(hasProperty(messageObject, PROP_IS_ECHO)){
+            boolean isEcho = getPropertyAsBoolean(messageObject, PROP_IS_ECHO);
+            if(isEcho){
+                return;
+            }
+        }
 
         String senderId = getPropertyAsString(senderObject, PROP_ID);
         String recipientId = getPropertyAsString(recipientObject, PROP_ID);
