@@ -71,8 +71,14 @@ public class MessengerController {
         if(hasProperty(messageObject, PROP_IS_ECHO)){
             boolean isEcho = getPropertyAsBoolean(messageObject, PROP_IS_ECHO);
             if(isEcho){
+                System.out.println("Echo message. Ignored");
                 return;
             }
+        }
+
+        if(hasProperty(messageObject, PROP_DELIVERY)){
+            System.out.println("Delivery message. Ignored");
+            return;
         }
 
         String senderId = getPropertyAsString(senderObject, PROP_ID);
