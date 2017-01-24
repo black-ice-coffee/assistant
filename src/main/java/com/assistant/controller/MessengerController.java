@@ -46,8 +46,8 @@ public class MessengerController {
 
         final String objectType = getPropertyAsString(payloadJsonObject, PROP_OBJECT);
         if (objectType == null || !objectType.equalsIgnoreCase(OBJECT_TYPE_PAGE)) {
-            throw new IllegalArgumentException("'object' property has to be 'page'. " +
-                    "Make sure this is a page subscription");
+            System.out.println(body);
+            return;
         }
 
         final JsonArray entries = getPropertyAsJsonArray(payloadJsonObject, PROP_ENTRY);
