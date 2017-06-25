@@ -45358,7 +45358,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              null,
-	              _react2.default.createElement('iframe', { width: '100%', height: '363px', scrolling: 'no', src: 'http://giavangvn.org/tygiahomnay/short/widgets' })
+	              _react2.default.createElement('iframe', { width: '100%', height: '300px', scrolling: 'no', src: '//www.tygia.com/api.php?column=1&title=0&chart=0&gold=1&rate=1&expand=0&color=1D4C75&nganhang=VIETCOM&ngoaite=usd,jpy,chf,eur,gbp,aud&fontsize=80&change=0' })
 	            )
 	          ),
 	          _react2.default.createElement(
