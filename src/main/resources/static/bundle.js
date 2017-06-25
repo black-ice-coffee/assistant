@@ -45302,6 +45302,8 @@
 	
 	var _reactRouter = __webpack_require__(179);
 	
+	var _reactBootstrap = __webpack_require__(235);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45326,9 +45328,50 @@
 	
 	
 	      return _react2.default.createElement(
-	        'div',
-	        { className: 'Home' },
-	        'Home'
+	        _reactBootstrap.Grid,
+	        { fluid: true },
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { md: 4 },
+	            _react2.default.createElement('div', { className: 'coinmarketcap-currency-widget', 'data-currency': 'bitcoin', 'data-base': 'USD' })
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { md: 4 },
+	            _react2.default.createElement('div', { className: 'coinmarketcap-currency-widget', 'data-currency': 'ethereum', 'data-base': 'USD', 'data-secondary': 'BTC' })
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { md: 4 },
+	            _react2.default.createElement('div', { className: 'coinmarketcap-currency-widget', 'data-currency': 'ripple', 'data-base': 'USD', 'data-secondary': 'BTC' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Row,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { md: 4 },
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement('iframe', { width: '100%', height: '363px', scrolling: 'no', src: 'http://giavangvn.org/tygiahomnay/short/widgets' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { md: 4 },
+	            _react2.default.createElement('div', { className: 'coinmarketcap-currency-widget', 'data-currency': 'litecoin', 'data-base': 'USD', 'data-secondary': 'BTC' })
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Col,
+	            { md: 4 },
+	            _react2.default.createElement('div', { className: 'coinmarketcap-currency-widget', 'data-currency': 'ethereum-classic', 'data-base': 'USD', 'data-secondary': 'BTC' })
+	          )
+	        )
 	      );
 	    }
 	  }]);

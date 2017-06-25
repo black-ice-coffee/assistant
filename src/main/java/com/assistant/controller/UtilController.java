@@ -33,7 +33,7 @@ public class UtilController {
 
     @RequestMapping(value = "currency", method = RequestMethod.GET)
     public ResponseEntity getRate() throws UnirestException, IOException, JAXBException {
-        ExrateList rate = priceService.getExRate();
+        String rate = priceService.getExRateString();
         return Helper.createSuccess(rate);
     }
 
