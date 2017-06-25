@@ -18,7 +18,7 @@ class RSSStore {
         this.isLoading = true;
         const request = new Request(API.getFullUrl(API.feedSummary), {url: this.url});
         promiseCall(request).then((respond) => {
-            this.items = respond.data.data;
+            this.items = respond.data;
             this.isLoading = false;
         }).catch((error) => {
             isLoading = false;

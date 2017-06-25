@@ -15,7 +15,7 @@ export default class NoteStore {
         this.isLoading = true;
         const request = new Request(API.getFullUrl(API.note), {});
         promiseCall(request).then((respond) => {
-            this.notes = respond.data.data;
+            this.notes = respond.data;
             this.isLoading = false;
         }).catch((error) => {
             isLoading = false;

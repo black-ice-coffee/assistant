@@ -50,7 +50,7 @@ class RSSItemGroup extends Component{
         this.props.store.addRssItem(group, model).subscribe(
             (res) => {
                 this.close();
-                this.setState({group: res.data});
+                this.setState({group: res});
             }
         )
     }
@@ -131,7 +131,7 @@ class RSSList extends Component{
 
     loadRssGroup(){
         this.props.store.fetchRSS().subscribe(
-            (res) => {this.setState({rssGroups: res.data})}
+            (res) => {this.setState({rssGroups: res})}
         );
     }
 

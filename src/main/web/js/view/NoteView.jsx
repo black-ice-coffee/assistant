@@ -73,7 +73,7 @@ class NoteList extends Component {
     loadNotes() {
         this.props.store.fetchNotes().subscribe(
             (res) => {
-                this.setState({notes: res.data})
+                this.setState({notes: res})
             }
         );
     }
