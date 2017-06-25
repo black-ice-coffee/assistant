@@ -30,7 +30,7 @@ public class PriceService {
             for (GoldPrice.Ratelist.City city : rate.getRatelist().getCity()) {
                 if (city.getName().equalsIgnoreCase("Hồ Chí Minh") & city.getItem().size() > 0) {
                     GoldPrice.Ratelist.City.Item item = city.getItem().get(0);
-                    return "Buy: " + item.getBuy() + " Sell:" + item.getSell();
+                    return "SJC - " + item.getBuy() + " - " + item.getSell();
                 }
             }
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class PriceService {
             for (String code : codes) {
                 for (ExrateList.Exrate rate : rateList.getExrate()) {
                     if (rate.getCurrencyCode().equalsIgnoreCase(code)) {
-                        String price = code + " - Buy: " + rate.getBuy() + " Sell:" + rate.getSell();
+                        String price = code + " - " + rate.getBuy() + " - " + rate.getSell();
                         builder.append(price);
                         builder.append('\n');
                     }
