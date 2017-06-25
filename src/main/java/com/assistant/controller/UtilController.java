@@ -1,6 +1,7 @@
 package com.assistant.controller;
 
 import com.assistant.Helper;
+import com.assistant.model.ExrateList;
 import com.assistant.model.GoldPrice;
 import com.assistant.service.PriceService;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -27,6 +28,12 @@ public class UtilController {
                 return Helper.createSuccess(city.getItem());
             }
         }
+        return Helper.createSuccess(rate);
+    }
+
+    @RequestMapping(value = "currency", method = RequestMethod.GET)
+    public ResponseEntity getRate() throws UnirestException, IOException, JAXBException {
+        ExrateList rate = priceService.getExRate();
         return Helper.createSuccess(rate);
     }
 

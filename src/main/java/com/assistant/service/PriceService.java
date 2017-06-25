@@ -11,6 +11,8 @@ import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -78,17 +80,7 @@ public class PriceService {
     }
 
     public String getExRateString() {
-        try {
-            ExrateList rateList = getExRate();
-            StringBuilder builder = new StringBuilder();
-            for (ExrateList.Exrate rate : rateList.getExrate()) {
-                    String price = rate.getCurrencyCode() + " - Buy: " + rate.getBuy() + " Sell:" + rate.getSell();
-                    builder.append(price);
-                    builder.append('\n');
-            }
-            return builder.toString();
-        } catch (Exception e) {
-            return "";
-        }
+        List<String> interestedCodes = Arrays.asList("USD", "EUR", "JPY", "SGD", "AUD", "CAD", "THB");
+        return getExRateString(interestedCodes);
     }
 }
