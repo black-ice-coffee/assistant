@@ -1,7 +1,6 @@
 package com.assistant.controller;
 
-import com.assistant.model.GoldRate;
-import com.assistant.service.GoldRateService;
+import com.assistant.service.PriceService;
 import com.assistant.service.WeatherService;
 import com.github.messenger4j.MessengerPlatform;
 import com.github.messenger4j.exceptions.MessengerApiException;
@@ -24,8 +23,6 @@ public class MessengerController {
     private static final String MODE_SUBSCRIBE = "subscribe";
 
     private final JsonParser jsonParser = new JsonParser();
-
-
 
     @RequestMapping("hi")
     public String hi(){
@@ -94,8 +91,11 @@ public class MessengerController {
             WeatherService weatherService = new WeatherService();
             messageText = "It's " + weatherService.getCurrentTemperature() + " Celsius degree in Ho Chi Minh city";
         } else if("gold".equalsIgnoreCase(messageText)){
-            GoldRateService goldRateService = new GoldRateService();
-            messageText = goldRateService.getRateString();
+            PriceService priceService = new PriceService();
+            messageText = priceService.getGoldPriceString();
+        } else if ("currency".equalsIgnoreCase(messageText)){
+            PriceService priceService = new PriceService();
+            messageText = priceService.getExRateString();
         }
 
         try {

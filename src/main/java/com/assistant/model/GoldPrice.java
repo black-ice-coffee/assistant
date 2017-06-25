@@ -81,7 +81,7 @@ import javax.xml.bind.annotation.XmlValue;
     "ratelist"
 })
 @XmlRootElement(name = "root")
-public class Root {
+public class GoldPrice {
 
     @XmlElement(required = true)
     protected String title;
