@@ -45444,7 +45444,7 @@
 	            if (!model.isValid) return;
 	            this.props.store.addRssItem(group, model).subscribe(function (res) {
 	                _this3.close();
-	                _this3.setState({ group: res.data });
+	                _this3.setState({ group: res });
 	            });
 	        }
 	    }, {
@@ -45586,7 +45586,7 @@
 	            var _this6 = this;
 	
 	            this.props.store.fetchRSS().subscribe(function (res) {
-	                _this6.setState({ rssGroups: res.data });
+	                _this6.setState({ rssGroups: res });
 	            });
 	        }
 	    }, {
@@ -56069,7 +56069,7 @@
 	            this.isLoading = true;
 	            var request = new _api.Request(_api.API.getFullUrl(_api.API.feedSummary), { url: this.url });
 	            (0, _api.promiseCall)(request).then(function (respond) {
-	                _this.items = respond.data.data;
+	                _this.items = respond.data;
 	                _this.isLoading = false;
 	            }).catch(function (error) {
 	                isLoading = false;
@@ -56130,7 +56130,6 @@
 	
 	var API = {
 	    domain: "https://agile-inlet-54897.herokuapp.com",
-	    //domain: "http://localhost:8080",
 	    feedSummary: "/feed/summary",
 	    groups: "/feed/groups",
 	    groupItems: "/feed/groups/:id",
@@ -87740,7 +87739,7 @@
 	            var _this4 = this;
 	
 	            this.props.store.fetchNotes().subscribe(function (res) {
-	                _this4.setState({ notes: res.data });
+	                _this4.setState({ notes: res });
 	            });
 	        }
 	    }, {
@@ -105445,7 +105444,7 @@
 	            this.isLoading = true;
 	            var request = new _api.Request(_api.API.getFullUrl(_api.API.note), {});
 	            (0, _api.promiseCall)(request).then(function (respond) {
-	                _this.notes = respond.data.data;
+	                _this.notes = respond.data;
 	                _this.isLoading = false;
 	            }).catch(function (error) {
 	                isLoading = false;
