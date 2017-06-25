@@ -1,10 +1,11 @@
 package com.assistant;
 
-import com.assistant.model.Respond;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,26 +53,16 @@ public class Helper {
         return result.toString();
     }
 
-    public static Respond createSuccess(Object data){
-        Respond respond = new Respond();
-        respond.code = 200;
-        respond.data = data;
-        return respond;
+    public static ResponseEntity createSuccess(Object data){
+        return ResponseEntity.ok(data);
     }
 
-    public static Respond createFail(String message, Object data){
-        Respond respond = new Respond();
-        respond.code = 500;
-        respond.error = data;
-        respond.message = message;
-        return respond;
+    public static ResponseEntity createFail(String message, Object data){
+        return new ResponseEntity(data, HttpStatus.BAD_GATEWAY);
     }
 
-    public static Respond createFail(String message){
-        Respond respond = new Respond();
-        respond.code = 500;
-        respond.message = message;
-        return respond;
+    public static ResponseEntity createFail(String message){
+        return new ResponseEntity(message, HttpStatus.BAD_GATEWAY);
     }
 
     public static String generateId(){
