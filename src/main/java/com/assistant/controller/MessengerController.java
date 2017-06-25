@@ -99,7 +99,7 @@ public class MessengerController {
         } else if("price".equalsIgnoreCase(messageText)) {
             PriceService priceService = new PriceService();
             messageText = priceService.getExRateString();
-            messageText += "\n" + priceService.getGoldPriceString();
+            messageText += priceService.getGoldPriceString();
         }
 
         try {
