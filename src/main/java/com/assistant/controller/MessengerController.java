@@ -106,9 +106,7 @@ public class MessengerController {
             if(messageText != null){
                 sendClient.sendTextMessage(senderId, messageText);
             }
-        } catch (MessengerApiException e) {
-            e.printStackTrace();
-        } catch (MessengerIOException e) {
+        } catch (MessengerApiException | MessengerIOException e) {
             e.printStackTrace();
         }
     }

@@ -51,7 +51,7 @@ public class RssReaderJob {
 
         // foreach rss: read and save data
         List<RssEntity> rssEntities = rssRepository.findAll();
-        for(RssEntity rssEntity: rssEntities){
+        for (RssEntity rssEntity : rssEntities) {
             try {
                 log.info("Processing URL: " + rssEntity.getUrl());
                 readRss(rssEntity);
@@ -66,11 +66,11 @@ public class RssReaderJob {
 
     private void readRss(RssEntity rssEntity) throws IOException, FeedException {
         URL feedUrl = new URL(rssEntity.getUrl());
-        HttpURLConnection httpcon = (HttpURLConnection)feedUrl.openConnection();
+        HttpURLConnection httpcon = (HttpURLConnection) feedUrl.openConnection();
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = input.build(new XmlReader(httpcon));
 
-        if(rssEntity.getLastUpdated() != null && rssEntity.getLastUpdated().after(feed.getPublishedDate())){
+        if (rssEntity.getLastUpdated() != null && rssEntity.getLastUpdated().after(feed.getPublishedDate())) {
             log.info("Already updated");
             return;
         }
@@ -82,7 +82,7 @@ public class RssReaderJob {
             SyndEntry entry = (SyndEntry) itEntries.next();
             try {
                 NewsEntity newsEntity = getNews(entry);
-                if(rssEntity.getLastUpdated() == null || rssEntity.getLastUpdated().before(newsEntity.getPublishedDate())){
+                if (rssEntity.getLastUpdated() == null || rssEntity.getLastUpdated().before(newsEntity.getPublishedDate())) {
                     newsEntity.setRssUrl(rssEntity.getUrl());
                     newsEntities.add(newsEntity);
                 }
@@ -91,7 +91,7 @@ public class RssReaderJob {
             }
         }
 
-        newsRepository.save(newsEntities);
+        newsRepository.saveAll(newsEntities);
     }
 
     private NewsEntity getNews(SyndEntry entry) throws MalformedURLException, BoilerpipeProcessingException {
@@ -106,18 +106,18 @@ public class RssReaderJob {
         return newsEntity;
     }
 
-    private void syncRss(){
+    private void syncRss() {
         List<RssGroupItemEntity> itemEntities = rssGroupItemRepository.findAll();
 
         List<RssEntity> rssEntities = rssRepository.findAll();
         Dictionary<String, RssEntity> rssMap = new Hashtable<>(rssEntities.size());
-        for(RssEntity entity: rssEntities){
-            rssMap.put(entity.getUrl(),entity);
+        for (RssEntity entity : rssEntities) {
+            rssMap.put(entity.getUrl(), entity);
         }
 
         List<RssEntity> newEntites = new ArrayList<>();
-        for(RssGroupItemEntity itemEntity: itemEntities){
-            if(rssMap.get(itemEntity.getUrl()) == null){
+        for (RssGroupItemEntity itemEntity : itemEntities) {
+            if (rssMap.get(itemEntity.getUrl()) == null) {
                 RssEntity rssEntity = new RssEntity();
                 rssEntity.setUrl(itemEntity.getUrl());
                 rssEntity.setTitle(itemEntity.getTitle());
@@ -125,8 +125,8 @@ public class RssReaderJob {
                 newEntites.add(rssEntity);
             }
         }
-        if(newEntites.size() > 0){
-            rssRepository.save(newEntites);
+        if (newEntites.size() > 0) {
+            rssRepository.saveAll(newEntites);
         }
     }
 }

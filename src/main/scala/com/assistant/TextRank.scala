@@ -27,8 +27,8 @@ class TextRank {
     val sentences = splitSentences(content)
     val n = sentences.length
     val si = Array.ofDim[Double](n, n)
-    for(i <- 0 to n-1 by 1){
-      for(j <- 0 to n - 1 by 1){
+    for(i <- 0 until n by 1){
+      for(j <- 0 until n by 1){
         breakable{
           if(i == j){
             break
